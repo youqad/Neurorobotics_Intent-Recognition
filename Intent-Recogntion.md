@@ -43,7 +43,7 @@ The aim of this exercice is to develop a human feedback classifier : positive (a
 
 ...
 
-## 3. Check functionals for both voiced (i.e. f0 6= 0) and unvoiced segments. Which segments are suited for the approach?
+## 3. Check functionals for both voiced (i.e. f0 ≠ 0) and unvoiced segments. Which segments are suited for the approach?
 
 ...
 
