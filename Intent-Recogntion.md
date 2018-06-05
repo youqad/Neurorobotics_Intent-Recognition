@@ -61,4 +61,21 @@ test_data = data[train_length:]
 ```
 
 ## 5. Train a classifer (k-NN method)
+
 ## 6. Evaluate and discuss the performance of the classifier
+
+
+# You will discuss the relevance of the parameters (f0 et energy), the role of the functionals, the role of k, ratio of Learning/Test databases, random design of databases.
+
+
+# Exercice 2. Detection of multiple intents :
+We consider the following intents : "Approval", "Prohibition" and "Attention"
+1. Extract the prosodic features (f0 and energy) and their functionals
+2. Develop a classifier for these three classses
+3. Evaluate and discuss the performance of the classifier. We could use confusion matrices.
+
+#Steps
+
+## 1. Extract the prosodic features (f0 and energy) and their functionals
+## 2. Develop a classifier for these three classses
+## 3. Evaluate and discuss the performance of the classifier. We could use confusion matrices.
