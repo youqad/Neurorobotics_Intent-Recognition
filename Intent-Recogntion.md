@@ -48,5 +48,17 @@ The aim of this exercice is to develop a human feedback classifier : positive (a
 ...
 
 ## 4. Build two databases by randomly extracting examples : Learning database (60%) and Test database
+
+(codes to be revised to cordinate with your codes)
+
+```python
+import random
+
+train_length = round(length(a)*0.6)
+random.shuffle(data)
+train_data = data[:train_length]
+test_data = data[train_length:]
+```
+
 ## 5. Train a classifer (k-NN method)
 ## 6. Evaluate and discuss the performance of the classifier
