@@ -131,10 +131,7 @@ By comparing Table $3$, $4$ and $5$, we find that ...
 
 ## 5. Train a classifer (k-NN method)
 
-## 6. Evaluate and discuss the performance of the classifier
-
-
-# You will discuss the relevance of the parameters (f0 et energy), the role of the functionals, the role of k, ratio of Learning/Test databases, random design of databases.
+## 6. Evaluate and discuss the performance of the classifier. You will discuss the relevance of the parameters (f0 et energy), the role of the functionals, the role of k, ratio of Learning/Test databases, random design of databases.
 
 
 # Exercice 2. Detection of multiple intents :
