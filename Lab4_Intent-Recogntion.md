@@ -27,12 +27,53 @@ In this exercice, we consider a Human-Robot Interaction situation in which a Hum
 
 ## 1. Extraction of prosodic features (f0 and energy)
 
-...
+We found that, in the given data, the files are labelled as "$at$", "$pw$" or "$ap$", which could represent the intention classes "Attention", "Prohibition Weak" and "Approval" respectively. Since the aim of this exercice is to develop a human feedback classifier for positive ("Approval") / negative ("Prohibition") intentions, we extract the files labelled as "$pw$" and "$ap$" and exclude the files labelled as "$at$".
+
+Our project was cooperated online using Google Colab. The codes for extracting the files labelled as "$pw$" and "$ap$" and extracting the prosodic features shown are as below:
+
+```python
+ filenames = list_from_URL('https://raw.githubusercontent.com/youqad/Neurorobotics_Intent-Recognition/master/filenames.txt')
+ filenames = list(set(filenames))
+ 
+ files = []
+ indices = []
+ 
+ for file in filenames:
+ 
+     URL_f0 = 'https://raw.githubusercontent.com/youqad/Neurorobotics_Intent-Recognition/master/data_files/{}.f0'.format(file)
+     file_dicts = [{key:val for key, val in zip(['time', 'f0'], map(float, l.split()))} for l in list_from_URL(URL_f0)]
+ 
+     URL_en = 'https://raw.githubusercontent.com/youqad/Neurorobotics_Intent-Recognition/master/data_files/{}.en'.format(file)
+     for l, d in zip(list_from_URL(URL_en), file_dicts):
+       d["file"] = file
+       d["en"] = float(l.split()[1])
+       d["label"] = file[-2:]
+ 
+     files.extend(file_dicts)
+ 
+# How `files` looks like:
+# # files = [ 
+# #           {"file": "cy0001at", "time": 0.02, "f0": 0., "en": 0.},
+# #           {"file": "cy0001at", "time": 1.28, "f0": 0., "en": 0.},
+# #           ...
+# #           {"file": "li1450at", "time": 0.02, "f0": 0., "en": 0.},
+# #           {"file": "li1450at", "time": 1.56, "f0": 404., "en": 65.}
+# #         ]
+ 
+ pd.DataFrame(files).to_csv('data.csv', encoding='utf-8', index=False) # To reuse it next time
+ google_files.download('data.csv')
+ 
+ # loading training data
+df = pd.read_csv('https://raw.githubusercontent.com/youqad/Neurorobotics_Intent-Recognition/master/data.csv').set_index('file')
+
+df1 = df.loc[df['label'] != 'at']
+```
 
 
 ## 2. Extraction of functionals (statistics) : mean, maximum, range, variance, median, first quartile, third quartile, mean absolute of local derivate
 
-The codes for the extraction of the functionals above are as below:
+We calculate the mean, max, range, variance, median. first quartile, third quartile and mean absolute pf local derivate for each $en$ and $f0$ file. The codes for the extraction of the functionals above are as below:
+
 ```python
 list_features  = ['mean', 
                   'max',
@@ -47,7 +88,7 @@ list_features  = ['mean',
 df1.groupby('file')['f0','en'].agg(list_features).head()
 ```
 
-The results we obatained for $f0$ and $en$ files are shown in Table $1$ and Table $2$ respectively:
+Table $1$ and Table $2$ show the first five lines of the statistics of $f0$ and $en$ files respectively:
 
 ### TABLE $1$ Statistics of $f0$ Files
 	
