@@ -89,9 +89,9 @@ df1.groupby('file')['f0','en'].agg(list_features).head()
 
 Table $1$ and Table $2$ show the first five lines of the statistics of $f0$ and $en$ files respectively:
 
-### TABLE $1$ Statistics of $f0$ files (first 5 lines)
+### TABLE $1$ Statistics of $f0$ files (first $5$ lines)
 	
-|file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|																	
+|file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|																	
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
 |cy0007pw|	92.3	|257.0|	257.0|	10372.5|	0.0|	0.0|	189.5|	13.7|	
 |cy0008pw	|78.4	|250.0|	250.0|	9930.1|	0.0|	0.0|	192.0|	26.4|	
@@ -100,9 +100,9 @@ Table $1$ and Table $2$ show the first five lines of the statistics of $f0$ and 
 |cy0011pw	|110.7	|230.0|	230.0|	9290.4|	172.0|	0.0|	192.5|	7.5|	
 
 
-### TABLE $2$ Statistics of $en$ files (first 5 lines)
+### TABLE $2$ Statistics of $en$ files (first $5$ lines)
 
-|file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|
+|file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
 |cy0007pw|52.3|	71.0|	71.0|	228.5|	52.0|	41.0|	66.0|	2.9|
 |cy0008pw	|47.7|	70.0|	70.0|	321.9|	43.0|	41.0|	64.5|	3.9|
@@ -127,11 +127,11 @@ unvoiced = df1.loc[df1['f0']==0].groupby('file')['en'].agg(list_features)
 unvoiced.head()
 ```
 
-The first 5 lines of statistics for voiced segments in $f0$ and $en$ files are shown in Table $3$ and Table $4$ respectively:
+The first $5$ lines of statistics for voiced segments in $f0$ and $en$ files are shown in Table $3$ and Table $4$ respectively:
 
-### TABLE $3$ Statistics of $f0$ files of voiced segments (first 5 lines)
+### TABLE $3$ Statistics of $f0$ files of voiced segments (first $5$ lines)
 	
-|file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|		
+|file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|		
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
 |cy0007pw|	200.3|	257.0|	90.0|	675.9|	191.0|	182.5|	213.0|	5.9|	
 |cy0008pw|	200.0|	250.0|	83.0|	538.4|	198.5|	179.5|	210.0|	10.4|	
@@ -139,9 +139,9 @@ The first 5 lines of statistics for voiced segments in $f0$ and $en$ files are s
 |cy0010pw|	186.1|	221.0|	67.0|	465.3|	178.5|	171.3|	204.3|	6.5|	
 |cy0011pw|	191.9|	230.0|	66.0|	314.8|	190.0|	179.0|	204.0|	4.1|	
 
-### TABLE $4$ Statistics of $en$ files of voiced segments (first 5 lines)
+### TABLE $4$ Statistics of $en$ files of voiced segments (first $5$ lines)
 
-|file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|
+|file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
 |cy0007pw|65.9|	71.0|	16.0|	17.8|	66.0|	63.5|	70.0|	1.7|
 |cy0008pw	|61.0|	70.0|	70.0|	242.7|	66.0|	61.5|	68.0|	5.8|
@@ -149,11 +149,11 @@ The first 5 lines of statistics for voiced segments in $f0$ and $en$ files are s
 |cy0010pw	|65.8|	77.0|	25.0|	50.5|	64.0|	62.0|	70.8|	4.0|
 |cy0011pw	|65.3|	71.0|	19.0|	14.7|	65.0|	63.0|	68.0|	0.9|
 
-The first 5 lines of statistics of unvoiced segments for $en$ files are shown in Table $5$:
+The first $5$ lines of statistics of unvoiced segments for $en$ files are shown in Table $5$:
 
-### TABLE $5$ Statistics of $en$ files of unvoiced segments (first 5 lines)
+### TABLE $5$ Statistics of $en$ files of unvoiced segments (first $5$ lines)
 
-|file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|
+|file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |								
 |cy0007pw|	40.7|	58.0|	58.0|	113.6|	41.0|	40.5|	43.5|	3.7|
 |cy0008pw|	39.2|58.0|	58.0|	189.6|	42.0|	41.0|	43.0|	5.2|
@@ -161,11 +161,11 @@ The first 5 lines of statistics of unvoiced segments for $en$ files are shown in
 |cy0010pw|	42.4|	68.0|	68.0|	101.4|	41.0|	40.0|	43.0|	3.1|
 |cy0011pw|	37.8|	51.0|	51.0|	150.9|	41.0|	40.0|	42.0|	4.1|
 
-To judge which segment is better for the approach, we should check how similar the data is wthin the same group and how different the data is in different groups. We firstly look at the overall statistics of the two segments for the two classes "Approval" and "Prohibition Weak". The results are shown in Table 6:
+To judge which segment is better for the approach, we should check how similar the data is wthin the same group and how different the data is in different groups. We firstly look at the overall statistics of the two segments for the two classes "Approval" and "Prohibition Weak". The results are shown in Table $6$:
 
 ### TABLE $6$ Statistics of "Approval" ($ap$) and "Prohibition Weak" ($pw$) files for voiced and unvoiced segments
 
-|sgments|file|class|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|
+|segments|file|class|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|
 | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |	--- |	
 |voiced|f0| ap| 289.5|	597.0|	521.0|	11013.0|272.0|	199.0|	370.5|	24.9|	
 |voiced|f0| pw|192.4|	597.0|	522.0|	2702.1|	191.0|	170.0|	218.0|	14.4|
@@ -176,7 +176,7 @@ To judge which segment is better for the approach, we should check how similar t
 |unvoiced|en| ap|46.4|	94.0|	94.0|	239.2|	43.0|	41.0|	55.0|	3.9|
 |unvoiced|en| pw|47.6|	91.0|	91.0|	231.1|	47.0|	40.0|	58.0|	3.5|
 
-Table 6 shows that, in voiced segments, the statistics of $f_0$ are more different for $ap$ and $pw$ files. The $en$ files of voiced and unvoiced segments are very close between the two different class ($ap$ and $pw$), and of course, the statistics $f0$ files of unvoiced segments are all 0. Thus, so far from the results of Table 6, $f_0$ values of voiced segments seem a better measurement for the approach. We will work on this problem more in Question 1.4, by plotting the data of different classes and observing their similarity in same group and separability in different groups.
+Table $6$ shows that, in voiced segments, the statistics of $f_0$ are more different for $ap$ and $pw$ files. The $en$ files of voiced and unvoiced segments are very close between the two different class ($ap$ and $pw$), and of course, the statistics $f0$ files of unvoiced segments are all 0. Thus, so far from the results of Table 6, $f_0$ values of voiced segments seem a better measurement for the approach. We will work on this problem more in Question 1.4, by plotting the data of different classes and observing their similarity in same group and separability in different groups.
 
 ## 4. Build two databases by randomly extracting examples : Learning database (60%) and Test database
 
