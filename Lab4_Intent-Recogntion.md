@@ -89,7 +89,7 @@ df1.groupby('file')['f0','en'].agg(list_features).head()
 
 Table $1$ and Table $2$ show the first five lines of the statistics of $f0$ and $en$ files respectively:
 
-### TABLE $1$ Statistics of $f0$ files (first $5$ lines)
+#### TABLE $1$ Statistics of $f0$ files (first $5$ lines)
 	
 |file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|																	
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
@@ -100,7 +100,7 @@ Table $1$ and Table $2$ show the first five lines of the statistics of $f0$ and 
 |cy0011pw	|110.7	|230.0|	230.0|	9290.4|	172.0|	0.0|	192.5|	7.5|	
 
 
-### TABLE $2$ Statistics of $en$ files (first $5$ lines)
+#### TABLE $2$ Statistics of $en$ files (first $5$ lines)
 
 |file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
@@ -129,7 +129,7 @@ unvoiced.head()
 
 The first $5$ lines of statistics for voiced segments in $f0$ and $en$ files are shown in Table $3$ and Table $4$ respectively:
 
-### TABLE $3$ Statistics of $f0$ files of voiced segments (first $5$ lines)
+#### TABLE $3$ Statistics of $f0$ files of voiced segments (first $5$ lines)
 	
 |file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|		
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
@@ -139,7 +139,7 @@ The first $5$ lines of statistics for voiced segments in $f0$ and $en$ files are
 |cy0010pw|	186.1|	221.0|	67.0|	465.3|	178.5|	171.3|	204.3|	6.5|	
 |cy0011pw|	191.9|	230.0|	66.0|	314.8|	190.0|	179.0|	204.0|	4.1|	
 
-### TABLE $4$ Statistics of $en$ files of voiced segments (first $5$ lines)
+#### TABLE $4$ Statistics of $en$ files of voiced segments (first $5$ lines)
 
 |file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
@@ -151,7 +151,7 @@ The first $5$ lines of statistics for voiced segments in $f0$ and $en$ files are
 
 The first $5$ lines of statistics of unvoiced segments for $en$ files are shown in Table $5$:
 
-### TABLE $5$ Statistics of $en$ files of unvoiced segments (first $5$ lines)
+#### TABLE $5$ Statistics of $en$ files of unvoiced segments (first $5$ lines)
 
 |file|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |								
@@ -163,7 +163,7 @@ The first $5$ lines of statistics of unvoiced segments for $en$ files are shown 
 
 To judge which segment is better for the approach, we should check how similar the data is wthin the same group and how different the data is in different groups. We firstly look at the overall statistics of the two segments for the two classes "Approval" and "Prohibition Weak". The results are shown in Table $6$:
 
-### TABLE $6$ Statistics of "Approval" ($ap$) and "Prohibition Weak" ($pw$) files for voiced and unvoiced segments
+#### TABLE $6$ Statistics of "Approval" ($ap$) and "Prohibition Weak" ($pw$) files for voiced and unvoiced segments
 
 |segments|file|class|mean|	max|	range|	var|	median|	$1$st_quantile|	$3$rd_quantile|	mean_absolute_local_derivate|
 | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |	--- |	
@@ -222,7 +222,7 @@ Remind that in Question $1.4$, we found that the $f_0$ values of voiced segments
 
 <img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig1.png" alt=" Variance and mean absolute local derivate of voiced segments" style="margin-left: 7%;"/>
 
-### FIGURE $1$ Variance and mean absolute local derivate of $f_0$ in voiced segments
+#### FIGURE $1$ Variance and mean absolute local derivate of $f_0$ in voiced segments
 
 
 Figure 1 indicates that the Approval data nad Prohibition Weak data can be separated well using their variance and mean absolute local derivate of $f_0$ values in voiced segments, supporting our idea in Question 1.3 that $f_0$ values of voiced segments can be a good measurement for classifying.
@@ -233,7 +233,7 @@ We also plot the data using variance and mean absolute local derivate of $energy
 
 <img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig2.png" alt=" Variance and mean absolute local derivate of unvoiced segments" style="margin-left: 7%;"/>
 
-### FIGURE $2$ Variance and mean absolute local derivate of $energy$ inunvoiced segments
+#### FIGURE $2$ Variance and mean absolute local derivate of $energy$ inunvoiced segments
 
 
 Plot 2 shows that the data can not be separated well according to their classes using the variance and mean absolute local derivate of $energy$ inunvoiced segments. 
