@@ -221,6 +221,7 @@ Remind that in Question $1.4$, we found that the $f_0$ values of voiced segments
 
 
 <img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig1.png" alt=" Variance and mean absolute local derivate of voiced segments" style="margin-left: 7%;"/>
+
 ### FIGURE $1$ Variance and mean absolute local derivate of $f_0$ in voiced segments
 
 
@@ -231,10 +232,12 @@ We also plot the data using variance and mean absolute local derivate of $energy
 
 
 <img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig2.png" alt=" Variance and mean absolute local derivate of unvoiced segments" style="margin-left: 7%;"/>
+
 ### FIGURE $2$ Variance and mean absolute local derivate of $energy$ inunvoiced segments
 
 
 Plot 2 shows that the data can not be separated well according to their classes using the variance and mean absolute local derivate of $energy$ inunvoiced segments. 
+
 
 In sum, by plotting our randomly selected training data, we found that $f_0$ values of voiced segments are the best measurement for classifying.
 
