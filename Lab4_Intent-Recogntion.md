@@ -176,9 +176,69 @@ To judge which segment is better for the approach, we should check how similar t
 |unvoiced|en| ap|46.4|	94.0|	94.0|	239.2|	43.0|	41.0|	55.0|	3.9|
 |unvoiced|en| pw|47.6|	91.0|	91.0|	231.1|	47.0|	40.0|	58.0|	3.5|
 
-Table $6$ shows that, in voiced segments, the statistics of $f_0$ are more different for $ap$ and $pw$ files. The $en$ files of voiced and unvoiced segments are very close between the two different class ($ap$ and $pw$), and of course, the statistics $f0$ files of unvoiced segments are all 0. Thus, so far from the results of Table 6, $f_0$ values of voiced segments seem a better measurement for the approach. We will work on this problem more in Question 1.4, by plotting the data of different classes and observing their similarity in same group and separability in different groups.
+Table $6$ shows that, in voiced segments, the statistics of $f_0$ are more different for $ap$ and $pw$ files. The $en$ files of voiced and unvoiced segments are very close between the two different class ($ap$ and $pw$), and of course, the statistics $f0$ files of unvoiced segments are all 0. Thus, so far from the results of Table 6, $f_0$ values of voiced segments seem a better measurement for the approach. 
 
-## 4. Build two databases by randomly extracting examples : Learning database (60%) and Test database
+We will work on this problem more in Question 1.4, by plotting the data of different classes and observing their similarity in same group and separability in different groups.
+
+## 4. Build two databases by randomly extracting examples : Learning database ($60$%) and Test database
+
+We randomly extracted $60$% data from original dataset to build the training set and the remaiaining data were used as test set. The codes for this procedure are provided as below:
+
+```python
+def train_test(df=df1, train_percentage=.6, seed=1):
+  
+  voiced = df.loc[df['f0']!=0].groupby('file')['f0','en'].agg(list_features)
+  unvoiced = df.loc[df['f0']==0].groupby('file')['en'].agg(list_features)
+
+  X, Y = {}, {}
+
+  X['voiced'], Y['voiced'] = {}, {}
+  X['unvoiced'], Y['unvoiced'] = {}, {}
+
+
+  X['voiced']['all'] = np.array(df.groupby('file')['f0','en'].agg(list_features))
+  Y['voiced']['all'] = np.array(df.loc[df['f0']!=0].groupby(['file']).min().label.values)
+
+  X['unvoiced']['all'] = np.array(unvoiced)
+  Y['unvoiced']['all'] = np.array(df.loc[df['f0']==0].groupby(['file']).min().label.values)
+  
+  np.random.seed(seed)
+  
+  for type in ['voiced', 'unvoiced']:
+    n = len(X[type]['all'])
+    ind_rand = np.random.randint(n, size=int(train_percentage*n)) # random indices
+    train_mask = np.zeros(n, dtype=bool)
+    train_mask[ind_rand] = True
+    X[type]['train'], X[type]['test'] = X[type]['all'][train_mask],  X[type]['all'][~train_mask]
+    Y[type]['train'], Y[type]['test'] = Y[type]['all'][train_mask],  Y[type]['all'][~train_mask]
+  
+  return X, Y
+
+X1, Y1 = train_test()
+```
+
+Remind that in Question $1.4$, we found that the $f_0$ values of voiced segments might be the better measurement for classifying. Thus, we plot the training data of voiced segments in the $2$d coordinate system consitituted by $variance$ and $mean absolute local derivate$ of $f0$ files. The plot is shown as Figure 1:
+
+
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig1.png" alt=" Variance and mean absolute local derivate of voiced segments" style="margin-left: 7%;"/>
+### FIGURE $1$ Variance and mean absolute local derivate of $f_0$ in voiced segments
+
+
+Figure 1 indicates that the Approval data nad Prohibition Weak data can be separated well using their variance and mean absolute local derivate of $f_0$ values in voiced segments, supporting our idea in Question 1.3 that $f_0$ values of voiced segments can be a good measurement for classifying.
+
+
+We also plot the data using variance and mean absolute local derivate of $energy$ values in unvoiced segments. The plot is shown in Figure 2:
+
+
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig2.png" alt=" Variance and mean absolute local derivate of unvoiced segments" style="margin-left: 7%;"/>
+### FIGURE $2$ Variance and mean absolute local derivate of $energy$ inunvoiced segments
+
+
+Plot 2 shows that the data can not be separated well according to their classes using the variance and mean absolute local derivate of $energy$ inunvoiced segments. 
+
+In sum, by plotting our randomly selected training data, we found that $f_0$ values of voiced segments are the best measurement for classifying.
+
+
 
 ## 5. Train a classifer (k-NN method)
 
