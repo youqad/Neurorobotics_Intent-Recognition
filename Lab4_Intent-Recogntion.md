@@ -19,13 +19,13 @@ abstract: 'Lab 4: Intent Recognition'
 
 # Exercice 1. Automatic detection of speaker’s intention from supra-segmental feat
 
-In this exercice, we consider a Human-Robot Interaction situation in which a Human is evaluating actions performed by the Kismet robot: approval or prohibition. The initial corpus contains a total of 1002 American English utterances of varying linguistic content produced by three female speakers in five classes of affective communicative intents. The classes are Approval, Attention, Prohibition Weak, Soothing, and Neutral utterances. The affective intents sound acted and are generally expressed rather strongly. The speech recordings are of variable length, mostly in the range of 1.8 - 3.25s. We extracted prosodic features such as f0 and energy. Files are respectively named *.f0 and *.en (time, value)
+In this exercice, we consider a Human-Robot Interaction situation in which a Human is evaluating actions performed by the Kismet robot: approval or prohibition. The initial corpus contains a total of 1002 American English utterances of varying linguistic content produced by three female speakers in five classes of affective communicative intents. The classes are Approval, Attention, Prohibition Weak, Soothing, and Neutral utterances. The affective intents sound acted and are generally expressed rather strongly. The speech recordings are of variable length, mostly in the range of 1.8 - 3.25s. We extracted prosodic features such as $f_0$ and $energy$. Files are respectively named *.$f0$ and *.$en$ (time, value)
 
 
 # Steps
 
 
-## 1. Extraction of prosodic features (f0 and energy)
+## 1. Extraction of prosodic features ($f_0$ and $energy$)
 
 We found that, in the given data, the files are labelled as "$at$", "$pw$" or "$ap$", which could represent the intention classes "Attention", "Prohibition Weak" and "Approval" respectively. Since the aim of this exercice is to develop a human feedback classifier for positive ("Approval") / negative ("Prohibition") intentions, we extract the files labelled as "$pw$" and "$ap$" and exclude the files labelled as "$at$".
 
@@ -64,15 +64,14 @@ Our project was cooperated online using Google Colab. The codes for extracting t
  google_files.download('data.csv')
  
  # loading training data
-df = pd.read_csv('https://raw.githubusercontent.com/youqad/Neurorobotics_Intent-Recognition/master/data.csv').set_index('file')
-
-df1 = df.loc[df['label'] != 'at']
+ df = pd.read_csv('https://raw.githubusercontent.com/youqad/Neurorobotics_Intent-Recognition/master/data.csv').set_index('file')
+ df1 = df.loc[df['label'] != 'at']
 ```
 
 
 ## 2. Extraction of functionals (statistics) : mean, maximum, range, variance, median, first quartile, third quartile, mean absolute of local derivate
 
-We calculate the mean, max, range, variance, median. first quartile, third quartile and mean absolute pf local derivate for each $en$ and $f0$ file. The codes for the extraction of the functionals above are as below:
+We calculated the mean, max, range, variance, median. first quartile, third quartile and mean absolute pf local derivate for each $en$ and $f0$ file. The codes for the extraction of the functionals above are as below:
 
 ```python
 list_features  = ['mean', 
@@ -90,7 +89,7 @@ df1.groupby('file')['f0','en'].agg(list_features).head()
 
 Table $1$ and Table $2$ show the first five lines of the statistics of $f0$ and $en$ files respectively:
 
-### TABLE $1$ Statistics of $f0$ Files
+### TABLE $1$ Statistics of $f0$ files (first 5 lines)
 	
 |file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|																	
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
@@ -101,7 +100,7 @@ Table $1$ and Table $2$ show the first five lines of the statistics of $f0$ and 
 |cy0011pw	|110.7	|230.0|	230.0|	9290.4|	172.0|	0.0|	192.5|	7.5|	
 
 
-### TABLE $2$ Statistics of $en$ Files
+### TABLE $2$ Statistics of $en$ files (first 5 lines)
 
 |file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
@@ -111,30 +110,26 @@ Table $1$ and Table $2$ show the first five lines of the statistics of $f0$ and 
 |cy0010pw	|46.1|	77.0|	77.0|	165.8|	42.0|	41.0|	50.8|	3.3|
 |cy0011pw	|53.7|	71.0|	71.0|	258.1|	62.0|	41.3|	66.0|	2.3|
 
-Table $1$ demonstrates that... (question: stats for each sample file? or for all files?)
 
-Table $2$ demonstrates that...
+## 3. Check functionals for both voiced (i.e. $f_0$ ≠ $0$) and unvoiced segments. Which segments are suited for the approach?
 
-
-## 3. Check functionals for both voiced (i.e. $f0$ ≠ $0$) and unvoiced segments. Which segments are suited for the approach?
-
-The codes for calculating the statistics of voiced (i.e. $f0$ ≠ $0$) segments are:
+We extract voiced segments by looking for the data whose $f_0$ value is not equal to $0$. The codes for extracting voiced sections and calculating the statistics of them are:
 
 ```python
 voiced = df1.loc[df1['f0']!=0].groupby('file')['f0','en'].agg(list_features)
 voiced.head()
 ```
 
-The codes for calculating the statistics of unvoiced (i.e. $f0$ = $0$) segments are:
+Similarly, we extract the unvoiced segments by looking for the data whose $f_0$ value equals to $0$. The codes for extracting unvoiced segments and calculating the statistics of them are:
 
 ```python
 unvoiced = df1.loc[df1['f0']==0].groupby('file')['en'].agg(list_features)
 unvoiced.head()
 ```
 
-The statistics of $f0$ files and $en$ files for voiced segments are shown in Table $3$ and Table $4$ respectively:
+The first 5 lines of statistics for voiced segments in $f0$ and $en$ files are shown in Table $3$ and Table $4$ respectively:
 
-### TABLE $3$ Statistics of $f0$ Files of Voiced Segments
+### TABLE $3$ Statistics of $f0$ files of voiced segments (first 5 lines)
 	
 |file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|		
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
@@ -144,7 +139,7 @@ The statistics of $f0$ files and $en$ files for voiced segments are shown in Tab
 |cy0010pw|	186.1|	221.0|	67.0|	465.3|	178.5|	171.3|	204.3|	6.5|	
 |cy0011pw|	191.9|	230.0|	66.0|	314.8|	190.0|	179.0|	204.0|	4.1|	
 
-### TABLE $4$ Statistics of $en$ Files of Voiced Segments
+### TABLE $4$ Statistics of $en$ files of voiced segments (first 5 lines)
 
 |file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |
@@ -154,9 +149,9 @@ The statistics of $f0$ files and $en$ files for voiced segments are shown in Tab
 |cy0010pw	|65.8|	77.0|	25.0|	50.5|	64.0|	62.0|	70.8|	4.0|
 |cy0011pw	|65.3|	71.0|	19.0|	14.7|	65.0|	63.0|	68.0|	0.9|
 
-The statistics for $en$ files for unvoiced segments are shown in Table $5$:
+The first 5 lines of statistics of unvoiced segments for $en$ files are shown in Table $5$:
 
-### TABLE $5$ Statistics of $en$ Files of Unvoiced Segments
+### TABLE $5$ Statistics of $en$ files of unvoiced segments (first 5 lines)
 
 |file|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|
 | ---------- | --- |--- |--- |--- |--- |--- |--- |--- |								
@@ -166,7 +161,22 @@ The statistics for $en$ files for unvoiced segments are shown in Table $5$:
 |cy0010pw|	42.4|	68.0|	68.0|	101.4|	41.0|	40.0|	43.0|	3.1|
 |cy0011pw|	37.8|	51.0|	51.0|	150.9|	41.0|	40.0|	42.0|	4.1|
 
-By comparing Table $3$, $4$ and $5$, we find that ...
+To judge which segment is better for the approach, we should check how similar the data is wthin the same group and how different the data is in different groups. We firstly look at the overall statistics of the two segments for the two classes "Approval" and "Prohibition Weak". The results are shown in Table 6:
+
+### TABLE $6$ Statistics of "Approval" ($ap$) and "Prohibition Weak" ($pw$) files for voiced and unvoiced segments
+
+|sgments|file|class|mean|	max|	range|	var|	median|	1st_quantile|	3rd_quantile|	mean_absolute_local_derivate|
+| --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |	--- |	
+|voiced|f0| ap| 289.5|	597.0|	521.0|	11013.0|272.0|	199.0|	370.5|	24.9|	
+|voiced|f0| pw|192.4|	597.0|	522.0|	2702.1|	191.0|	170.0|	218.0|	14.4|
+|voiced|en|ap|73.3|	93.0|	93.0	|88.2|	74.0|	68.0|	79.0|	3.5|
+|voiced|en|pw|71.6|	91.0|	91.0|	84.7|	72.0|	65.0|	79.0|	3.0|	
+|unvoiced|f0| ap|0.0|	0.0|	0.0|	0.0|	0.0|	0.0|	0.0|	0.0|
+|unvoiced|f0| pw|0.0|	0.0|	0.0|	0.0|	0.0|	0.0|	0.0|	0.0|
+|unvoiced|en| ap|46.4|	94.0|	94.0|	239.2|	43.0|	41.0|	55.0|	3.9|
+|unvoiced|en| pw|47.6|	91.0|	91.0|	231.1|	47.0|	40.0|	58.0|	3.5|
+
+Table 6 shows that, in voiced segments, the statistics of $f_0$ are more different for $ap$ and $pw$ files. The $en$ files of voiced and unvoiced segments are very close between the two different class ($ap$ and $pw$), and of course, the statistics $f0$ files of unvoiced segments are all 0. Thus, so far from the results of Table 6, $f_0$ values of voiced segments seem a better measurement for the approach. We will work on this problem more in Question 1.4, by plotting the data of different classes and observing their similarity in same group and separability in different groups.
 
 ## 4. Build two databases by randomly extracting examples : Learning database (60%) and Test database
 
