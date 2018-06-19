@@ -375,3 +375,5 @@ plt.show()
 ## 3. Evaluate and discuss the performance of the classifier. We could use confusion matrices.
 
 As before, the classifier is more accurate for voiced segments than for unvoiced segments: with voiced training data, $86%$ of the prohibition data, $61%$ of the approval files and $67%$ of the attention files were classified correctly. With unvoiced training data, the results are globally worse classifiers than randomness: only $51%$ of the prohibition data, $45%$ of the approval data and $37%$ of the attention data were correctly identified.
+
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig5_Voiced.png"/>
