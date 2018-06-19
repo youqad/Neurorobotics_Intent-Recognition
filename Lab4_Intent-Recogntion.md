@@ -336,11 +336,33 @@ The results above, again, support that voiced segments are better for training t
 
 ## 6. Evaluate and discuss the performance of the classifier. You will discuss the relevance of the parameters (f0 et energy), the role of the functionals, the role of k, ratio of Learning/Test databases, random design of databases.
 
+(1) relevanc of the parameters $f_0$ and $energy$
+
 As shown in question 1.5, the classifier has relatively good results with voiced training data:  $92%$ of the prohibition data and $91%$  of the"Approval" data were correctly classified. The results are worse with unvoiced training data: $77%$ of the appproval data were correctly classified, and only $49%$ of the prohibition data were correctly classified, which means that the recognition of prohibition data is worse than the recognition of approval data, for unvoiced training data.
 
-This better accuracy with voiced training data endorses the observation that f0 files are more relevent than en file for the classification.
+This better accuracy with voiced training data, as well as the more separated data using $f_0$ shown in Question $1.1.4$, endorse the observation that f0 files are more relevent than en file for the classification.
 
-The results presented here correspond to a training/learning ratio of 0.6. The classifier becomes less accurate for lower values of the ratio (due to a lack of training) and for larger values of the ratio as well (due to overfitting the data).
+
+(2) the role of the functionals
+We have plotted the $f0$ data using different functionals as dimensions. Figure 5 and Figure 6 show the data represented by $mean$ and $mean absolute local derivate$, and $mean$ and $variance$. We found that using $mean$ and $variance$, the data can be separeted better in the plot, thus, $mean$ and $variance$ might be the optimal functionals for representing the data.
+
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/mean-dev.png" alt=" mean_dev" style="margin-left: 7%;"/>
+
+#### FIGURE $5$ $f0$ data represented by $mean$ and $mean absolute local derivate$
+
+
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/mean-var.png" alt=" mean_dev" style="margin-left: 7%;"/>
+
+#### FIGURE $5$ $f0$ data represented by $mean$ and $variance$
+
+(3) the role of k
+
+By implementing knn classifier using different $k$ values, we found that with a higher $k$, the $pw$ data can be classified more accurately, but the $ap$ data will be classified less accurately. This might because that larger values of $k$ reduces effect of the noise on the classification, but make boundaries between the classes less distinct.
+
+(4) the ratio of Learning/Testing data
+
+By testing the accuracy of classifier with different ratio values, we found that the classifier becomes less accurate for lower values of the ratio (due to a lack of training) and for larger values of the ratio as well (due to overfitting the data).
+
 
 # Exercice 2. Detection of multiple intents :
 
@@ -357,6 +379,8 @@ df.groupby('file')['f0','en'].agg(list_features).head()
 ## 2. Develop a classifier for these three classses
 
 We then develop a classifier which takes into account a third class, which is "attention", and which relates to segments wich are neither approvals nor prohibitions.
+
+
 ```python
 X, Y = train_test(df=df)
 sklearn_knn(3, X, Y)
@@ -378,8 +402,10 @@ As before, the classifier is more accurate for voiced segments than for unvoiced
 
 <img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig5_Voiced.png" alt=" Confusion matrix for Voiced training data" style="margin-left: 7%;"/>
 
-#### FIGURE $5$ Confusion Matrix using Voiced Training Data
+#### FIGURE $7$ Confusion Matrix using Voiced Training Data
 
 <img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig6_unvoiced.png" alt=" Confusion matrix for unvoiced training data" style="margin-left: 7%;"/>
 
-#### FIGURE $6$ Confusion Matrix using Unvoiced Training Data
+#### FIGURE $8$ Confusion Matrix using Unvoiced Training Data
+
+By comparing with Question 1.5 we can find that, the classifier does not perform well for classifying 3 classes. 
