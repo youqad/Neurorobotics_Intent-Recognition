@@ -376,10 +376,10 @@ plt.show()
 
 As before, the classifier is more accurate for voiced segments than for unvoiced segments: with voiced training data, $86%$ of the prohibition data, $61%$ of the approval files and $67%$ of the attention files were classified correctly. With unvoiced training data, the results are globally worse classifiers than randomness: only $51%$ of the prohibition data, $45%$ of the approval data and $37%$ of the attention data were correctly identified.
 
-<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig5_Voiced.png" alt=" Confusion matrix for Voiced training data" style="margin-left: 7%;/>
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig5_Voiced.png" alt=" Confusion matrix for Voiced training data" style="margin-left: 7%;"/>
 
 #### FIGURE $5$ Confusion Matrix using Voiced Training Data
 
-<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig6_unvoiced.png" alt=" Confusion matrix for unvoiced training data" style="margin-left: 7%;/>
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig6_unvoiced.png" alt=" Confusion matrix for unvoiced training data" style="margin-left: 7%;"/>
 
 #### FIGURE $5$ Confusion Matrix using Unvoiced Training Data
