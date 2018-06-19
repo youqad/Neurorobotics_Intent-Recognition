@@ -346,5 +346,31 @@ The results presented here correspond to a training/learning ratio of 0.6. The c
 # Steps
 
 ## 1. Extract the prosodic features (f0 and energy) and their functionals
+
+Here, we use the same method than in question 1.1, using the DataFrame "df" instead of "df1":
+
+```
+df.groupby('file')['f0','en'].agg(list_features).head()
+```
+
 ## 2. Develop a classifier for these three classses
+
+We then develop a classifier which takes into account a third class, which is "attention", and which relates to segments wich are neither approvals nor prohibitions.
+```
+X, Y = train_test(df=df)
+sklearn_knn(3, X, Y)
+plt.figure()
+cm = kNN(3, X['voiced'], Y['voiced'], labels=["pw", "ap", "at"])
+plot_confusion_matrix(cm, classes=["pw", "ap", "at"],
+                      title='Confusion matrix, without normalization')
+plt.show()
+
+cm2 = kNN(3, X['unvoiced'], Y['unvoiced'], labels=["pw", "ap", "at"])
+plot_confusion_matrix(cm2, classes=["pw", "ap", "at"],
+                      title='Confusion matrix, without normalization')
+plt.show()
+```
+
 ## 3. Evaluate and discuss the performance of the classifier. We could use confusion matrices.
+
+As before, the classifier is more accurate for voiced segments than for unvoiced segments: with voiced training data, $86%$ of the prohibition data, $61%$ of the approval files and $67%$ of the attention files were classified correctly. With unvoiced training data, the results are globally worse classifiers than randomness: only $51%$ of the prohibition data, $45%$ of the approval data and $37%$ of the attention data were correctly identified.
