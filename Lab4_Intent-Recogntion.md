@@ -10,12 +10,15 @@ tags:
   - lab
   - tutorial
   - exercise
+  - intention
+  - classification
+  - knn
 
 abstract: 'Lab 4: Intent Recognition'
 ---
 
 # Lab 4: Intent Recognition
-### Younesse Kaddar, Alexandre Olech and Kexin Ren (**Lecturers**: ???)
+### Younesse Kaddar, Alexandre Olech and Kexin Ren (**Lecturers**: Mohamed CHETOUANI)
 
 # Exercice 1. Automatic detection of speaker’s intention from supra-segmental feat
 
