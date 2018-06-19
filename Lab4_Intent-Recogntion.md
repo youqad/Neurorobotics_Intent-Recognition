@@ -336,7 +336,11 @@ The results above, again, support that voiced segments are better for training t
 
 ## 6. Evaluate and discuss the performance of the classifier. You will discuss the relevance of the parameters (f0 et energy), the role of the functionals, the role of k, ratio of Learning/Test databases, random design of databases.
 
+As shown in question 1.5, the classifier has relatively good results with voiced training data:  $92%$ of the prohibition data and $91%$  of the"Approval" data were correctly classified. The results are worse with unvoiced training data: $77%$ of the appproval data were correctly classified, and only $49%$ of the prohibition data were correctly classified, which means that the recognition of prohibition data is worse than the recognition of approval data, for unvoiced training data.
 
+This better accuracy with voiced training data endorses the observation that f0 files are more relevent than en file for the classification.
+
+The results presented here correspond to a training/learning ratio of 0.6. The classifier becomes less accurate for lower values of the ratio (due to a lack of training) and for larger values of the ratio as well (due to overfitting the data).
 # Exercice 2. Detection of multiple intents :
 
 # Steps
