@@ -245,6 +245,95 @@ In sum, by plotting our randomly selected training data, we found that $f_0$ val
 
 ## 5. Train a classifer (k-NN method)
 
+We used two methods for training the k-NN classifier, trying both voiced and unvoiced data:
+(1) Scikit Learn's kNN classifier
+(2) Implementation by ourselves
+
+We firstly apply Scikit Learn's kNN classifier to have a preliminary idea about the classification results. The codes for Scikit Learn's kNN classifier are shown as below:
+
+```python
+# Scikit Learn's kNN classifier:
+# Just to test, but we will implement it ourselves of course!
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+
+def sklearn_knn(k, X, Y):
+  for type in ['voiced', 'unvoiced']:
+    kNN = KNeighborsClassifier(n_neighbors=k)
+    kNN.fit(X[type]['train'], Y[type]['train'])
+
+    print("Accuracy score for {}: {:.2f}".format(type, accuracy_score(Y[type]['test'],
+                                                                  kNN.predict(X[type]['test']))))
+sklearn_knn(3, X1, Y1)
+```
+
+The classification result of Scikit Learn's kNN classifier indicate that:
+(1) Accuracy score of voiced data = $0.91$
+(2) Accuracy score of unvoiced data = $0.61$
+
+We can see that the accuracy of voiced data is 91%, much higher than the accuracy of unvoiced data which is only 61%.
+
+
+Then, we implement our own algorithm with both voiced and unvoiced data using the following codes:
+
+```python
+# Our own implementation!
+from scipy.spatial.distance import cdist
+from sklearn.metrics import confusion_matrix
+from collections import Counter
+
+def kNN(k, X, Y, labels=["pw", "ap"]):
+    # auxiliary function: label prediction (by majority vote)
+    # based on the nearest neighbors
+    def predicted_label(ind_neighbors):
+        label_neighbors = tuple(Y['train'][ind_neighbors])
+        return Counter(label_neighbors).most_common(1)[0][0]
+    
+    # Pairwise distances between test and train data points
+    dist_matrix = cdist(X['test'], X['train'], 'euclidean')
+    y_predicted = []
+
+    for i in range(len(X['test'])):
+        ind_k_smallest = np.argpartition(dist_matrix[i, :], k)[:k]
+        y_predicted.append(predicted_label(ind_k_smallest))
+    
+    # Confusion matrix: C[i, j] is the number of observations 
+    # known to be in group i but predicted to be in group j
+    return confusion_matrix(Y['test'], np.array(y_predicted), labels=labels)
+
+plt.figure()
+cm = kNN(3, X1['voiced'], Y1['voiced'])
+plot_confusion_matrix(cm, classes=["pw", "ap"],
+                      title='Confusion matrix, without normalization')
+plt.show()
+
+cm2 = kNN(3, X1['unvoiced'], Y1['unvoiced'])
+plot_confusion_matrix(cm2, classes=["pw", "ap"],
+                      title='Confusion matrix, without normalization')
+plt.show()
+```
+
+
+The results of our implementation are shown in Figure 3 and Figure 4:
+
+
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/q1.5-1.png" alt=" Confusion matrix of voiced data" style="margin-left: 7%;"/>
+
+#### FIGURE $3$ Confusion Matrix using Voiced Training Data
+
+
+Figure 3 demonstates that, using voiced segments as training dta, the accuracy of the classifier is pretty high: $92%$ "Prohibition Weak" data and $91%$ "Approval" data was correctly classified.
+
+<img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/q1.5-2.png" alt=" Confusion matrix of voiced data" style="margin-left: 7%;"/>
+
+#### FIGURE $4$ Confusion Matrix using Unvoiced Training Data
+
+
+Figure 4 demonstates that, using unvoiced segments as training dta, the accuracy of the classifier is not ideal: ony $49%$ "Prohibition Weak" data and $77%$ "Approval" data was correctly classified.
+
+
+The results above, again, support that voiced segments are better for training the classifier.
+
 ## 6. Evaluate and discuss the performance of the classifier. You will discuss the relevance of the parameters (f0 et energy), the role of the functionals, the role of k, ratio of Learning/Test databases, random design of databases.
 
 
