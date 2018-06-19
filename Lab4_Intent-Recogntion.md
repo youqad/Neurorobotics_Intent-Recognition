@@ -217,7 +217,7 @@ def train_test(df=df1, train_percentage=.6, seed=1):
 X1, Y1 = train_test()
 ```
 
-Remind that in Question $1.4$, we found that the $f_0$ values of voiced segments might be the better measurement for classifying. Thus, we plot the training data of voiced segments in the $2$d coordinate system consitituted by $variance$ and $mean absolute local derivate$ of $f0$ files. The plot is shown as Figure 1:
+Remind that in Question $1.3$, we found that the $f_0$ values of voiced segments might be the better measurement for classifying. Thus, we plot the training data of voiced segments in the $2$d coordinate system consitituted by $variance$ and $mean absolute local derivate$ of $f0$ files. The plot is shown as Figure 1:
 
 
 <img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig1.png" alt=" Variance and mean absolute local derivate of voiced segments" style="margin-left: 7%;"/>
