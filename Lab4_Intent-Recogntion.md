@@ -382,4 +382,4 @@ As before, the classifier is more accurate for voiced segments than for unvoiced
 
 <img src="https://github.com/youqad/Neurorobotics_Intent-Recognition/blob/master/fig6_unvoiced.png" alt=" Confusion matrix for unvoiced training data" style="margin-left: 7%;"/>
 
-#### FIGURE $5$ Confusion Matrix using Unvoiced Training Data
+#### FIGURE $6$ Confusion Matrix using Unvoiced Training Data
