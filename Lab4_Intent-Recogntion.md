@@ -341,6 +341,7 @@ As shown in question 1.5, the classifier has relatively good results with voiced
 This better accuracy with voiced training data endorses the observation that f0 files are more relevent than en file for the classification.
 
 The results presented here correspond to a training/learning ratio of 0.6. The classifier becomes less accurate for lower values of the ratio (due to a lack of training) and for larger values of the ratio as well (due to overfitting the data).
+
 # Exercice 2. Detection of multiple intents :
 
 # Steps
@@ -349,14 +350,14 @@ The results presented here correspond to a training/learning ratio of 0.6. The c
 
 Here, we use the same method than in question 1.1, using the DataFrame "df" instead of "df1":
 
-```
+```python
 df.groupby('file')['f0','en'].agg(list_features).head()
 ```
 
 ## 2. Develop a classifier for these three classses
 
 We then develop a classifier which takes into account a third class, which is "attention", and which relates to segments wich are neither approvals nor prohibitions.
-```
+```python
 X, Y = train_test(df=df)
 sklearn_knn(3, X, Y)
 plt.figure()
