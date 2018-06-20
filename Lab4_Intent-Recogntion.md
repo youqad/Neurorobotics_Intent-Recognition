@@ -21,7 +21,7 @@ abstract: 'Lab 4: Intent Recognition'
 # Lab 4: Intent Recognition
 ### Younesse Kaddar, Alexandre Olech and Kexin Ren (**Lecturer**: Mohamed Chetouani)
 
-
+[Jupyter Notebook](http://younesse.net/ipynb/neurorobotics/Intent_Recognition.html)
 
 # Exercice 1. Automatic detection of speaker’s intention from supra-segmental features
 
